@@ -130,6 +130,15 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+}
+.main-input {
+    max-width: 450px;
+    width:100%;
+}
+.main-output {
+    max-width: 450px;
+    width:100%;
 }
 
 }
