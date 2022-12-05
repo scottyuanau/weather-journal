@@ -84,7 +84,7 @@ h1 {
     top:10em;
     border-radius: 10px;
     border:none;
-    padding-left:10px;
+    padding-left:20px;
 
 }
 #zip:hover {
@@ -98,10 +98,24 @@ h1 {
     top:14em;
     border-radius: 10px;
     border:none;
-    padding:10px;
+    padding:20px;
 }
 #feelings:hover {
     box-shadow: 0px 2px 2px black;
+}
+
+.activeplace-holder-feeling::placeholder {
+    font-size:0.6em;
+    color:rgb(207, 207, 207);
+    position:absolute;
+    top:3%;
+}
+
+.activeplace-holder-zip::placeholder {
+    font-size:0.6em;
+    color:rgb(207, 207, 207);
+    position:absolute;
+    top:10%;
 }
 
 
