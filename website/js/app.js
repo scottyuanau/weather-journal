@@ -13,7 +13,7 @@ const zipURL = 'https://api.openweathermap.org/geo/1.0/zip?zip=';
 const apiKey = '&appid=69460dd362bf8c5d994887599f201a80&units=imperial';
 let date = new Date();
 let year = date.getFullYear();
-let month = date.getMonth();
+let month = ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sep','Oct','Nov','Dec'][date.getMonth()];
 let day = date.getDay();
 let today = [day,month,year];
 //setup dates
