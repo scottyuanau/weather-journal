@@ -8,53 +8,86 @@ https://api.openweathermap.org/geo/1.0/zip?zip=71601&appid=69460dd362bf8c5d99488
 
 */
 
-let weatherURL = 'https://api.openweathermap.org/data/2.5/weather?';
-let zipURL = 'https://api.openweathermap.org/geo/1.0/zip?zip=';
-let apiKey = '&appid=69460dd362bf8c5d994887599f201a80&units=imperial';
-
+const weatherURL = 'https://api.openweathermap.org/data/2.5/weather?';
+const zipURL = 'https://api.openweathermap.org/geo/1.0/zip?zip=';
+const apiKey = '&appid=69460dd362bf8c5d994887599f201a80&units=imperial';
+let date = new Date();
+let year = date.getFullYear();
+let month = date.getMonth();
+let day = date.getDay();
+let today = [day,month,year];
+//setup dates
 
 
 document.querySelector('.generate').addEventListener('click',performAction);
-let lat;
-let lon; //needs to do something here, first time is returning undefined, second time is ok.
 
 function performAction() {
         let feelings = document.querySelector('.feelings').value;
         let zip = document.querySelector('#zip').value;
-
         getCoordinates(zipURL,apiKey,zip)
-        .then(getTemperature(lat, lon,weatherURL,apiKey));
+        .then((coordinates)=>getTemperature(coordinates,weatherURL,apiKey))
+        .then((temperature)=>postData('/addJournal',{'date': `${day} ${month} ${year}`,'temperature': temperature,'feelings': feelings}))
+        .then(updateUI());
+    }
 
 
 
-}
 
 //find coordinates
     const getCoordinates = async (url,key,zip)=>{
         const res = await fetch(url+zip+key);
+        let coordinates = [];
         try {
             const data = await res.json();
-            lat = data.lat;
-            lon = data.lon;
-            return data;
+            coordinates.push(data.lat);
+            coordinates.push(data.lon);
+            return coordinates;
         } catch(error) {
             console.log('error',error);
         }
 
     };
 //find temperature
-    const getTemperature = async (lat,lon,url,key)=>{
-        const res = await fetch(url+'lat='+lat+'&lon='+lon+key);
+    const getTemperature = async (coordinates,url,key)=>{
+        const res = await fetch(url+'lat='+coordinates[0]+'&lon='+coordinates[1]+key);
+        let temperature;
         try {
             const data = await res.json();
-            console.log(data);
-            return data;
+            temperature = data.main.temp;
+            return temperature;
         } catch(error) {
             console.log('error',error);
         }
     };
 
+//post data to server
+    const postData = async (url = '', data = {})=>{
+        const response = await fetch(url, {
+            method:'POST',
+            credentials: 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        });
+        try {
+            const newData = await response.json();
+            return newData;
+        } catch(error) {
+            console.log('error', error);
+        }
+    };
 
+//update UI
+    const updateUI = async () => {
+        const response = await fetch(`/all`);
+        try {
+            const allData = await response.json();
+            console.log(allData);
+        } catch(error) {
+            console.log('error', error);
+        }
+    };
 
 
 

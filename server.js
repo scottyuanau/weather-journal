@@ -18,13 +18,21 @@ function listening(){
     console.log(`running on localhost: ${port}`);
 }
 
-let data = [];
+
 app.post('/addjournal', addJournal);
+app.get('/all',getJournal);
 
-
-
+let data = [];
 
 function addJournal (req,res) {
+    // projectData.date = req.body.date;
+    // projectData.temperature = req.body.temperature;
+    // projectData.feelings = req.body.feelings;
     data.push(req.body);
-    console.log(data);
+    console.log('data received',data);
+}
+
+function getJournal (req,res) {
+    res.send(data);
+    console.log('data sent:',data);
 }
