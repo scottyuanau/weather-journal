@@ -27,7 +27,7 @@ function performAction() {
         getCoordinates(zipURL,apiKey,zip)
         .then((coordinates)=>getTemperature(coordinates,weatherURL,apiKey))
         .then((temperature)=>postData('/addJournal',{'date': `${day} ${month} ${year}`,'temperature': temperature,'feelings': feelings}))
-        .then(()=>updateUI());
+        .then(()=>updateUI()); //need to pass in the returned promise from previous call, otherwise would be invoked directly and cause sequence error.
     }
 
 
