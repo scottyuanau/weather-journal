@@ -59,7 +59,7 @@ main {
     min-width: 300px;
 }
 .main-input:hover {
-    box-shadow: 0px 2px 2px black;
+    box-shadow: 0px 5px 30px rgb(208, 208, 208);
 }
 
 h1 {
@@ -81,7 +81,7 @@ h1 {
 
 }
 #zip:hover {
-    box-shadow: 0px 2px 2px black;
+    box-shadow: 0px 5px 30px #1A2873;
 }
 
 #feelings {
@@ -92,7 +92,7 @@ h1 {
     padding:20px;
 }
 #feelings:hover {
-    box-shadow: 0px 2px 2px black;
+    box-shadow: 0px 5px 30px #1A2873;
 }
 
 .activeplace-holder-feeling::placeholder {
@@ -125,17 +125,26 @@ h1 {
 
 }
 .main-output:hover {
-    box-shadow: 0px 2px 2px black;
+    box-shadow: 0px 5px 30px rgb(208, 208, 208);
 }
 .newFeeling {
     display:grid;
     grid-template-columns: repeat(12,1fr);
-    width:80%;
+    width:90%;
     border-bottom: 1px dotted black;
-    padding-bottom:10px;
-    padding-top:10px;
+    padding:20px;
+    background-color: white;
+    border-radius: 20px;
+    margin-bottom:10px;
+
 
 }
+
+.newFeeling:hover {
+    box-shadow: 0px 5px 30px rgb(208, 208, 208);
+    transition: box-shadow 0.3s ease;
+}
+
 .feelingBasic {
     grid-column: 1/5;
     display: flex;

@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 .generate:hover {
-    box-shadow: 0px 2px 2px #1A2873;
+    box-shadow: 0px 5px 30px #1A2873;
     transition: box-shadow 0.1s linear;
 }
 .generate:active {
@@ -32,7 +32,7 @@
     margin-top:15px;
 }
 .delete:hover {
-    box-shadow: 0px 2px 2px #AA3131;
+    box-shadow: 0px 5px 30px rgb(208, 208, 208);
     transition: box-shadow 0.1s linear;
 }
 .delete:active {
