@@ -25,14 +25,18 @@ app.get('/all',getJournal);
 let data = [];
 
 function addJournal (req,res) {
-    // projectData.date = req.body.date;
-    // projectData.temperature = req.body.temperature;
-    // projectData.feelings = req.body.feelings;
     data.push(req.body);
     console.log('data received',data);
+    res.send({}); 
+    //post method must return a value, otherwise breaks promise chain.
 }
 
 function getJournal (req,res) {
-    res.send(data);
-    console.log('data sent:',data);
+    let newData = data.slice(data.length-1);
+    console.log(newData);
+    projectData.date = newData[0].date;
+    projectData.temperature = newData[0].temperature;
+    projectData.feelings = newData[0].feelings;
+    res.send(projectData);
+    console.log('data sent:',projectData);
 }

@@ -42,7 +42,7 @@ main {
     width:80%;
     max-width:1000px;
     min-width: 300px;
-    min-height: 800px;
+    min-height: 600px;
 }
 
 .main-input {
@@ -113,16 +113,48 @@ h1 {
 .main-output {
     background-color: #f2f2f2;
     grid-column: 6/13;
-    height: 600px;
+    min-height: 600px;
+    height:auto;
     border-radius: 30px;
     min-width: 300px;
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    padding:15px;
+
 }
 .main-output:hover {
     box-shadow: 0px 2px 2px black;
+}
+.newFeeling {
+    display:grid;
+    grid-template-columns: repeat(12,1fr);
+    width:80%;
+    border-bottom: 1px dotted black;
+    padding-bottom:10px;
+    padding-top:10px;
+
+}
+.feelingBasic {
+    grid-column: 1/5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right:10px;
+}
+.feelingContent {
+    grid-column: 5/12;
+    display: flex;
+    align-items: center;
+    border-left: 1px dotted black;
+    padding-left: 10px;
+    overflow-wrap:break-word;
+}
+h2 {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-size:1.5em;
 }
 
 @media (max-width:800px) {

@@ -14,7 +14,7 @@ const apiKey = '&appid=69460dd362bf8c5d994887599f201a80&units=imperial';
 let date = new Date();
 let year = date.getFullYear();
 let month = ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sep','Oct','Nov','Dec'][date.getMonth()];
-let day = date.getDay();
+let day = date.getDate();
 let today = [day,month,year];
 //setup dates
 
@@ -83,10 +83,32 @@ function performAction() {
         const response = await fetch(`/all`);
         try {
             const allData = await response.json();
-            console.log(allData);
+        let newFeeling = document.createElement('div');
+        let newFeelingBasic = document.createElement('div');
+        let newFeelingContent = document.createElement('div');
+        let newFeelingBasicHeading = document.createElement('h2');
+        let newFeelingBasicContent = document.createElement('p');
+        newFeeling.classList.add('newFeeling');
+        newFeelingBasic.classList.add('feelingBasic');
+        newFeelingContent.classList.add('feelingContent');
+        newFeelingBasicContent.classList.add('feelingBasicContent');
+        newFeelingBasicHeading.textContent = allData.date;
+        newFeelingBasicContent.textContent = `${allData.temperature.toFixed(2)}°F, ${((allData.temperature - 32)*5/9).toFixed(2)}°C`;
+        let newFeelingPara = document.createElement('p');
+        newFeelingPara.textContent = allData.feelings;
+        newFeelingContent.appendChild(newFeelingPara);
+        newFeelingBasic.appendChild(newFeelingBasicHeading);
+        newFeelingBasic.appendChild(newFeelingBasicContent);
+        newFeeling.appendChild(newFeelingBasic);
+        newFeeling.appendChild(newFeelingContent);
+        document.querySelector('.main-output').prepend(newFeeling);
+
         } catch(error) {
             console.log('error', error);
         }
+
+
+    
     };
 
 
@@ -104,3 +126,13 @@ document.querySelector('#zip').addEventListener('focus',()=>{
 document.querySelector('#zip').addEventListener('blur',()=>{
     document.querySelector('#zip').classList.remove('activeplace-holder-zip');
 });
+
+//delete button
+document.querySelector('.delete').addEventListener('click', ()=>{
+    document.querySelector('.delete').previousSibling.remove();
+})
+
+//update today's date
+window.addEventListener('load',()=>{
+    document.querySelector('.todaydate').textContent =  `${day} ${month} ${year}`;
+})
